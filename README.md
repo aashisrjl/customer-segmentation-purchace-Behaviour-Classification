@@ -28,6 +28,7 @@ customer-segmentation/
 
 ## How to Run
 ```bash
+conda activate venv
 pip install -r requirements.txt
 jupyter notebook
 ```
