@@ -8,14 +8,16 @@ This project performs **customer segmentation using K-Means clustering** and the
 ```
 customer-segmentation/
 ├── data/
-│   ├── raw_data.csv          # Original dataset
-│   ├── processed_data.csv    # After preprocessing
-│   └── clustered_data.csv    # After clustering (with labels)
+│   ├── raw/
+│   │   └── raw_data.csv          # Raw data — 8,068 customers, 10 features (no labels)
+│   └── processed/
+│       ├── processed_data.csv    # After preprocessing (scaled, encoded)
+│       └── clustered_data.csv    # After clustering (with Cluster labels)
 ├── notebooks/
-│   ├── 01_EDA.ipynb          # Exploratory Data Analysis
-│   ├── 02_preprocessing.ipynb
-│   ├── 03_clustering.ipynb
-│   └── 04_classification.ipynb
+│   ├── 01_EDA.ipynb              # Exploratory Data Analysis
+│   ├── 02_preprocessing.ipynb   # Impute, encode, scale → processed_data.csv
+│   ├── 03_clustering.ipynb      # K-Means + elbow → clustered_data.csv
+│   └── 04_classification.ipynb  # Train/test split → Random Forest
 ├── models/
 │   ├── kmeans_model.pkl
 │   └── classifier_model.pkl
@@ -26,16 +28,28 @@ customer-segmentation/
 └── README.md
 ```
 
+## Pipeline
+```
+data/raw/raw_data.csv
+       ↓
+  01 EDA — understand data
+       ↓
+  02 Preprocessing — clean, encode, scale → processed_data.csv
+       ↓
+  03 Clustering (K-Means) — segment customers → clustered_data.csv
+       ↓
+  04 Classification (Random Forest) — train/test split → predict Cluster
+```
+
 ## How to Run
 ```bash
-conda activate venv
 pip install -r requirements.txt
 jupyter notebook
 ```
-Run notebooks in order: 01 → 02 → 03 → 04
+Run notebooks **in order**: `01 → 02 → 03 → 04`
 
 ## Dataset
-Mall Customer Dataset — [Kaggle](https://www.kaggle.com/datasets/vjchoudhary7/customer-segmentation-tutorial-in-python)
+Source: `data/raw/raw_data.csv` — 8,068 customers, 10 features
 
 ## Tools
 Python, scikit-learn, pandas, matplotlib, seaborn
